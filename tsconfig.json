@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "paths": {
+      "assets/*": ["./assets/*"],
+      "components/*": ["./components/*"],
+      "config/*": ["./config/*"],
+      "models/*": ["./models/*"],
+      "pages/*": ["./pages/*"],
+      "routes/*": ["./routes/*"],
+      "service/*": ["./service/*"],
+      "styles/*": ["./styles/*"],
+      "translate/*": ["./translate/*"],
+      "utils/*": ["./utils/*"],
+      "state/*": ["./state/*"],
+    },
+  },
+  "include": [
+    "src"
+  ]
+}

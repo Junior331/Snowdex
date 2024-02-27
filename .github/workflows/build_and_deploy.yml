@@ -1,0 +1,30 @@
+name: Rebuild and Redeploy Nakama on Docker
+on:
+  push:
+    branches:
+      - develop
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v2
+      - name: Install DigitalOcean Controller
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Set up Docker Builder
+        uses: docker/setup-buildx-action@v1
+      - name: Authenticate with DigitalOcean Container Registry
+        run: doctl registry login --expiry-seconds 300
+      - name: Build and Push to DigitalOcean Container Registry
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile.${{ github.ref_name }}
+          push: true
+          tags: registry.digitalocean.com/maverickmetalabs/snowdex-website:${{ github.ref_name }}
+      - name: Logout from DigitalOcean Container Registry
+        run: doctl registry logout
